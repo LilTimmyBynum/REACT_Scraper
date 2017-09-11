@@ -81,16 +81,16 @@ var Main = React.createClass({
     }.bind(this));
   },
 
-  // get saved articles from Mongo
-  getMyArticles: function() {
-    helpers.runArticleQuery().then(function(response) {
-      console.log(response);
-      if (response !== this.state.articles) {
-        console.log("Articles", response.data);
-        this.setState({ articles: response.data });
-      }
-    }.bind(this));
-  },
+  // // get saved articles from Mongo
+  // getMyArticles: function() {
+  //   helpers.runArticleQuery().then(function(response) {
+  //     console.log(response);
+  //     if (response !== this.state.articles) {
+  //       console.log("Articles", response.data);
+  //       this.setState({ articles: response.data });
+  //     }
+  //   }.bind(this));
+  // },
 
   // my page scraping function
   getSavedArticles: function() {
@@ -133,7 +133,8 @@ var Main = React.createClass({
         <h1>NYC REACT Scraper</h1>
         <p>
         <Link to="/Scrape"><button className="btn btn-primary btn-lg">Scrape</button></Link>
-        <Link to="/Myarticles"><button className="btn btn-danger btn-lg" onClick={this.getMyArticles}>Myarticles</button></Link> 
+        <Link to="/Myarticles"><button className="btn btn-danger btn-lg">Myarticles</button></Link> 
+     {/*} <Link to="/Myarticles"><button className="btn btn-danger btn-lg" onClick={this.getMyArticles}>Myarticles</button></Link> */}
         </p>       
         </div>
 

@@ -1,15 +1,29 @@
 // Include React
 var React = require("react");
 
+// Helper for making AJAX requests to our API
+var helpers = require("../utils/helpers");
+
 // This is the History component. It will be used to show a log of  recent searches.
 var History = React.createClass({
 
 
-getInitialState() {
-    return {
-      tacos: [ 'Guacamole', 'Beef', 'Bean' ]
-    };
+getInitialState: function() {
+    return { searchTerm: "", results: "", history: [], articles: [] };
   },
+
+
+// The moment the page renders get the History
+  componentDidMount: function() {
+    // Get the latest history.
+    helpers.runArticleQuery().then(function(response) {
+      console.log(response);
+      if (response !== this.state.articles) {
+        console.log("Articles", response.data);
+        this.setState({ articles: response.data });
+      }
+    }.bind(this));
+  },  
   
 
   // This function will respond to the user input
@@ -26,6 +40,17 @@ getInitialState() {
     event.preventDefault();
   },
 
+  // get saved articles from Mongo
+  getMyArticles: function() {
+    helpers.runArticleQuery().then(function(response) {
+      console.log(response);
+      if (response !== this.state.articles) {
+        console.log("Articles", response.data);
+        this.setState({ articles: response.data });
+      }
+    }.bind(this));
+  },
+
 
   // Here we describe this component's render method
   render: function() {
@@ -39,7 +64,7 @@ getInitialState() {
         <div className="panel-body">
 
           {/* Here we use a map function to loop through an array in JSX */}
-          {this.props.articles.map(function(article, i) {
+          {this.state.articles.map(function(article, i) {
             return (
               <div key={article._id} className="row">
                 <div className="panel">

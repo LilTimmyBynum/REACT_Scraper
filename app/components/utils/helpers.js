@@ -34,8 +34,8 @@ var helper = {
   },
 
   scrapeArticles: function() {
-    console.log("Getting scrape data =========================>");
-    // First, we grab the body of the html with request
+    // console.log("Getting scrape data =========================>");
+    // // First, we grab the body of the html with request
 
     // scraper("http://abc7ny.com/news//", function(err, data) {
     //   if(err) {
@@ -46,14 +46,16 @@ var helper = {
     //     console.log(data(this).text().trim()+'\n');
     //   });
 
+    },
 
-    var timo = "TimBynum";
 
-    return timo;
+    // var timo = "TimBynum";
+
+    // return timo;
     // });
 
 
-
+ 
 
 
 
@@ -81,7 +83,7 @@ var helper = {
     // });
 
 
-  },
+ 
 
   // this get my Articles from Mongo
   runArticleQuery: function() {

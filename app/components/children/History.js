@@ -21,10 +21,12 @@ var History = React.createClass({
 
   // Here we describe this component's render method
   render: function() {
+    console.log("History props ====>");
+    console.log(this.props);
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title text-center">Saved Articles</h3>
+          <h3 className="panel-title text-center">History Articles</h3>
         </div>
         <div className="panel-body">
 
