@@ -7,34 +7,48 @@ var helpers = require("../utils/helpers");
 var Scrape = React.createClass({
 
   getInitialState: function() {
-    return { searchTerm: "", results: "", history: [], articles: [] };
+    return {articles: [] };
   },
 
 // The moment the page renders get the History
   componentDidMount: function() {
     // Get the latest history.
-    helpers.runArticleQuery().then(function(response) {
-      console.log(response);
+    helpers.runQuery().then(function(response) {
+      console.log(response.data.newNews);
       if (response !== this.state.articles) {
         console.log("Articles", response.data);
-        this.setState({ articles: response.data });
+        this.setState({ articles: response.data.newNews });
       }
     }.bind(this));
   },
 
   render: function() {
+    console.log("the Articles props ====>");
+    // console.log(this.state.articles);
+    console.log(this.state.articles);
     return (
-      <div className="container">
-        <div className="col-lg-12">
-          <div className="panel panel-danger">
-            <div className="panel-heading">
-              <h3 className="panel-title">Scraped articles</h3>
-            </div>
-            <div className="panel-body">
-              I'm a Scraper
-            </div>
-            <div>{this.props.article}</div>
-          </div>
+      <div className="panel panel-default ">
+        <div className="panel-heading">
+          <h3 className="panel-title text-center">Scraped Articles</h3>
+        </div>
+        <div className="panel-body">
+
+          {/* Here we use a map function to loop through an array in JSX */}
+          {this.state.articles.map(function(article, i) {
+            return (
+              <div key={article._id} className="row">
+                <div className="panel">
+                    <div className="panel-heading primePanel">
+                    <div className="row">
+                    <div className="col-xs-4"><img src={article.image} width="200"/></div>
+                    <div className="col-xs-6">{article.headline}</div>
+                    <div className="col-xs-2"><button id="deleteArticleBtn" >add article</button></div>
+                    </div>
+                    </div>                                        
+                  </div>
+                </div>                
+            );
+          })}
         </div>
       </div>
     );

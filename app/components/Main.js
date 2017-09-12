@@ -28,7 +28,7 @@ var Main = React.createClass({
   // The moment the page renders get the History
   componentDidMount: function() {
     // Get the latest history.
-    helpers.getHistory().then(function(response) {
+    helpers.getMyArticles().then(function(response) {
       console.log(response);
       if (response !== this.state.history) {
         console.log("Articles", response.data);
@@ -38,31 +38,31 @@ var Main = React.createClass({
   },
 
   // If the component changes (i.e. if a search is entered)...
-  componentDidUpdate: function() {
+  // componentDidUpdate: function() {
 
-    // Run the query for the address
-    helpers.runQuery(this.state.searchTerm).then(function(data) {
-      if (data !== this.state.results) {
-        console.log("Address", data);
-        this.setState({ results: data });
+  //   // Run the query for the address
+  //   helpers.runQuery(this.state.searchTerm).then(function(data) {
+  //     if (data !== this.state.results) {
+  //       console.log("Address", data);
+  //       this.setState({ results: data });
 
-        // After we've received the result... then post the search term to our history.
-        helpers.postHistory(this.state.searchTerm).then(function() {
-          console.log("Updated!");
+  //       // After we've received the result... then post the search term to our history.
+  //       helpers.postHistory(this.state.searchTerm).then(function() {
+  //         console.log("Updated!");
 
-          // After we've done the post... then get the updated history
-          helpers.getHistory().then(function(response) {
-            console.log("Current History", response.data);
+  //         // After we've done the post... then get the updated history
+  //         helpers.getHistory().then(function(response) {
+  //           console.log("Current History", response.data);
 
-            console.log("History", response.data);
+  //           console.log("History", response.data);
 
-            this.setState({ history: response.data });
+  //           this.setState({ history: response.data });
 
-          }.bind(this));
-        }.bind(this));
-      }
-    }.bind(this));
-  },
+  //         }.bind(this));
+  //       }.bind(this));
+  //     }
+  //   }.bind(this));
+  // },
   // This function allows childrens to update the parent.
   setTerm: function(term) {
     this.setState({ searchTerm: term });
@@ -149,7 +149,7 @@ var Main = React.createClass({
 
           
 
-          <div className="col-md-6">
+     {/*    <div className="col-md-6">
 
             <Form setTerm={this.setTerm} />
 
@@ -159,15 +159,15 @@ var Main = React.createClass({
 
             <Results address={this.state.results} />
 
-          </div>
+          </div>  */}
 
         </div>
 
-        <div className="row">
+    {/*    <div className="row">
 
           <History history={this.state.history} /> 
 
-        </div>
+        </div>    */}
 
       </div>
     );

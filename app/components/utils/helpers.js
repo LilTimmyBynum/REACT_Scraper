@@ -4,10 +4,16 @@ var axios = require("axios");
 // Our scraping tools
 // var request = require("request");
 // var cheerio = require("cheerio");
+// var cheerio = require("cheerio-react");
+
+const place = "newburgh";
 
 var react = require("react");
 var ReactCom = require("react-http-request");
 // var scraper = require("scraper");
+
+const news = [];
+const articleURL = "http://abc7ny.com/news/";
 
 
 // Geocoder API
@@ -17,24 +23,61 @@ var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
 var helper = {
 
   // This function serves our purpose of running the query to geolocate.
-  runQuery: function(location) {
+  // runQuery: function(location) {
 
-    console.log(location);
+  //   console.log(place);
 
-    // Figure out the geolocation
-    var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + geocodeAPI;
-    return axios.get(queryURL).then(function(response) {
-      // If get get a result, return that result's formatted address property
-      if (response.data.results[0]) {
-        return response.data.results[0].formatted;
-      }
-      // If we don't get any results, return an empty string
-      return "";
-    });
-  },
+  //   // Figure out the geolocation
+  //   var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + place + "&pretty=1&key=" + geocodeAPI;
+  //   return axios.get(queryURL).then(function(response) {
+  //     // If get get a result, return that result's formatted address property
+  //     if (response.data.results[0]) {
+  //       return response.data.results[0].formatted;
+  //     }
+  //     // If we don't get any results, return an empty string
+  //     return "";
+  //   });
+  // },
+
+
+  // runQuery: function(location) {
+
+  //   console.log(place);
+
+  //   // Figure out the geolocation
+  //   var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + place + "&pretty=1&key=" + geocodeAPI;
+  //   return axios.get(queryURL).then(function(response) {
+  //     // If get get a result, return that result's formatted address property
+  //     if (response.data.results[0]) {
+  //       return response.data.results[0].formatted;
+  //     }
+  //     // If we don't get any results, return an empty string
+  //     return "";
+  //   });
+  // },
+
+
+
+  
+
+
+
+
+
 
   scrapeArticles: function() {
-    // console.log("Getting scrape data =========================>");
+      return axios.get(articleURL).then(function(response) {
+        // var $ = cheerio.load(response.data);
+        console.log("News 7 Data ====>");
+        console.log(response.data);   
+      });
+   
+
+    },
+
+
+
+     // console.log("Getting scrape data =========================>");
     // // First, we grab the body of the html with request
 
     // scraper("http://abc7ny.com/news//", function(err, data) {
@@ -45,8 +88,6 @@ var helper = {
     //   data('.msg').each(function() {
     //     console.log(data(this).text().trim()+'\n');
     //   });
-
-    },
 
 
     // var timo = "TimBynum";
@@ -83,7 +124,10 @@ var helper = {
     // });
 
 
- 
+
+ runQuery: function() {
+    return axios.get("/news");
+  }, 
 
   // this get my Articles from Mongo
   runArticleQuery: function() {
@@ -91,7 +135,7 @@ var helper = {
   },
 
   // This function hits our own server to retrieve the record of query results
-  getHistory: function() {
+  getMyArticles: function() {
     return axios.get("/api");
   },
 

@@ -16,7 +16,7 @@ getInitialState: function() {
 // The moment the page renders get the History
   componentDidMount: function() {
     // Get the latest history.
-    helpers.runArticleQuery().then(function(response) {
+    helpers.getMyArticles().then(function(response) {
       console.log(response);
       if (response !== this.state.articles) {
         console.log("Articles", response.data);
@@ -55,7 +55,7 @@ getInitialState: function() {
   // Here we describe this component's render method
   render: function() {
     console.log("the Articles props ====>");
-    console.log(this.props);
+    console.log(this.state.articles);
     return (
       <div className="panel panel-default ">
         <div className="panel-heading">
